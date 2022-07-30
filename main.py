@@ -11,6 +11,10 @@ import getpass
 import os
 import asyncio
 
+import sys
+
+
+
 
 class AlunnaCam:
     def __init__(self) -> None:
@@ -20,6 +24,7 @@ class AlunnaCam:
         self.DirScreenshots = f'c:\\users\\{__username}\\Pictures\\'
         self.fps = 8.2
         self.isrecording = False
+    
     def screenshot(self):
         time.sleep(0.5) 
         bitmap = pyautogui.screenshot()
@@ -42,13 +47,15 @@ class AlunnaCam:
             pystray.MenuItem('Take a Screenshot',self.screenshot),
             recordORstop,
     pystray.MenuItem('Remove App Tray',self.closeApp))) 
-    def duration(self,seconds=None):
+    
+    @staticmethod
+    def duration(seconds=None):
         if seconds :return time.time() + seconds
     
     def screenrecord(self):
         self.isrecording =True
         bitmaps = []
-        duration = self.duration(3)
+        duration = AlunnaCam.duration(5)
         while time.time() < duration:
             pillowImage = pyautogui.screenshot()
             openCVImage = np.array(pillowImage.convert('RGB'))
@@ -63,17 +70,11 @@ class AlunnaCam:
 
 app = AlunnaCam()
 
-# ap
-
-
-# app.tray.stop()
 
 async def tray():await app.tray.run()
 
 
 async def main():
     recordtray = asyncio.create_task(tray())
-    while_loop = asyncio.create_task(loop(recordtray=recordtray)) 
     
-
 asyncio.run(main())
