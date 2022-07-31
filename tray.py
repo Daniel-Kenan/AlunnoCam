@@ -10,7 +10,6 @@ import pystray
 import getpass
 import os
 import asyncio
-
 import sys
 
 
@@ -34,6 +33,7 @@ class AlunnaCam:
     
     @property
     def filename(self):return time.time()
+
     def main(self):
         while not self.isrecording:     
             self.tray.run()
@@ -68,13 +68,6 @@ class AlunnaCam:
             out.write(bitmap)
         out.release()
 
-app = AlunnaCam()
 
-
-async def tray():await app.tray.run()
-
-
-async def main():
-    recordtray = asyncio.create_task(tray())
     
-asyncio.run(main())
+# asyncio.run(main())

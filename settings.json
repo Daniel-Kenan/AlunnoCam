@@ -1,0 +1,9 @@
+{
+    "Windows" : {
+        "storagepath" : ""
+    },
+    "Linux" : {
+        "storagepath" : ""
+    } ,
+    "instance": false
+}
